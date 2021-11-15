@@ -37,6 +37,8 @@ router.post('/celebrity', (req, res, next) => {
 			// res.render('books/details', { book: createdBook })
 			res.redirect(`/celebrity/${createdCeleb._id}`)
 		})
+        
+        .catch(err => next(err))
 });
 
 
