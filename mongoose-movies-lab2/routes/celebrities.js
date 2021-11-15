@@ -14,11 +14,33 @@ router.get('/celebrity', (req, res, next) => {
 	// res.send('hello')
 });
 
-// THIS IS FOR THE ID
-// router.get('/celebrity/add', (req, res, next) => {
-// 	res.render('celebrity/addForm')
-// });
 
+//THIS IS TO ADD NEW CELEBS
+router.get('/celebrity/new', (req, res, next) => {
+	res.render('celebrity/new')
+});
+
+router.post('/celebrity', (req, res, next) => {
+
+	const { name, occupation, catchPhrase } = req.body
+	// console.log(title, description, author, rating)
+
+	// create a new book
+	Celebrity.create({
+		name: name,
+		occupation: occupation,
+		catchPhrase: catchPhrase,
+	})
+		.then(createdCeleb => {
+			console.log(createdCeleb)
+			// show the book details for the created book
+			// res.render('books/details', { book: createdBook })
+			res.redirect(`/celebrity/${createdCeleb._id}`)
+		})
+});
+
+
+// THIS IS FOR THE ID
 router.get('/celebrity/:id', (req, res, next) => {
 	const id = req.params.id
 	Celebrity.findById(id)
