@@ -15,6 +15,8 @@ router.get('/celebrity', (req, res, next) => {
 });
 
 
+
+
 //THIS IS TO ADD NEW CELEBS
 router.get('/celebrity/new', (req, res, next) => {
 	res.render('celebrity/new')
@@ -40,6 +42,21 @@ router.post('/celebrity', (req, res, next) => {
         
         .catch(err => next(err))
 });
+
+
+router.get('/celebrity/delete/:id', (req, res, next) => {
+	const id = req.params.id
+	Celebrity.findByIdAndDelete(id)
+		.then(() => {
+			// redirect to the books list
+			res.redirect('/celebrity')
+		})
+		.catch(err => {
+			next(err)
+		})
+});
+
+
 
 
 // THIS IS FOR THE ID
