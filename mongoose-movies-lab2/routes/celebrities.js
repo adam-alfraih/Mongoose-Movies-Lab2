@@ -44,6 +44,9 @@ router.post('/celebrity', (req, res, next) => {
 });
 
 
+
+
+// THIS IS TO DELETE CELEBS
 router.get('/celebrity/delete/:id', (req, res, next) => {
 	const id = req.params.id
 	Celebrity.findByIdAndDelete(id)
@@ -55,6 +58,41 @@ router.get('/celebrity/delete/:id', (req, res, next) => {
 			next(err)
 		})
 });
+
+
+
+//THIS IS TO EDIT CELEBS
+router.get('/celebrity/edit/:id', (req, res, next) => {
+	const id = req.params.id
+	// get the book with this id
+	Celebrity.findById(id)
+		.then(celebFromDB => {
+			console.log(celebFromDB)
+			// render a form to edit the boo
+			res.render('celebrity/edit', { celeb: celebFromDB })
+		})
+		.catch(err => next(err))
+});
+
+router.post('/celebrity/edit/:id', (req, res, next) => {
+	const id = req.params.id
+	// retrieve the values from the request body
+	const { name, occupation, catchPhrase } = req.body
+	// find the book and update
+	Celebrity.findByIdAndUpdate(id, {
+		name,
+		occupation,
+		catchPhrase
+	}, { new: true })
+		.then(updatedCeleb => {
+			console.log(updatedCeleb)
+			// redirect to the details of the updated book
+			res.redirect(`/celebrity/${updatedCeleb._id}`)
+		})
+		.catch(err => next(err))
+});
+
+
 
 
 
