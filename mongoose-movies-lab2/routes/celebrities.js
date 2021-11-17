@@ -8,7 +8,7 @@ router.get('/celebrity', (req, res, next) => {
 		.then(celebsFromDB => {
 			console.log(celebsFromDB)
 			// render the view
-			res.render('celebrity/index', { celebList: celebsFromDB })
+			res.render('celebrity/index.hbs', { celebList: celebsFromDB })
 		})
 		.catch(err => next(err))
 	// res.send('hello')
@@ -19,7 +19,7 @@ router.get('/celebrity', (req, res, next) => {
 
 //THIS IS TO ADD NEW CELEBS
 router.get('/celebrity/new', (req, res, next) => {
-	res.render('celebrity/new')
+	res.render('celebrity/new.hbs')
 });
 
 router.post('/celebrity', (req, res, next) => {
@@ -83,6 +83,7 @@ router.post('/celebrity/edit/:id', (req, res, next) => {
 		name,
 		occupation,
 		catchPhrase
+		// this new:true updates the celeb, without it, it stays the same
 	}, { new: true })
 		.then(updatedCeleb => {
 			console.log(updatedCeleb)
@@ -103,7 +104,7 @@ router.get('/celebrity/:id', (req, res, next) => {
 	Celebrity.findById(id)
 		.then(celebsFromDB => {
 			console.log(celebsFromDB)
-			res.render('celebrity/show', { celebList: celebsFromDB })
+			res.render('celebrity/show.hbs', { celebList: celebsFromDB })
 		})
 		.catch(err => next(err))
 });

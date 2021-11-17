@@ -29,3 +29,25 @@ Celebrity.insertMany(celebrities)
 		// mongoose.connection.close()
 	})
 	.catch(err => console.log(err))
+
+
+
+
+
+	// MOVIES
+
+	// const movies = [
+	// 	{
+	// 		title: "Movies",
+	// 		genre: "Movie Genre",
+	// 		plot: "Plot Example",
+	// 	}
+	// ]
+
+
+	Movie.insertMany(movies)
+	.then(movie => {
+		console.log(`Success! - ${celebrity.length} were added to the database`)
+		// mongoose.connection.close()
+	})
+	.catch(err => console.log(err))

@@ -33,6 +33,10 @@ const celebrities = require("./routes/celebrities");
 // celebrities is celebrities.js
 app.use("/", celebrities);
 
+// celeb link
+const movies = require("./routes/movies");
+// celebrities is celebrities.js
+app.use("/", movies);
 
 
 
